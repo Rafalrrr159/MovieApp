@@ -1,29 +1,31 @@
 package com.example.movieapp.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.movieapp.MainActivity;
+import com.example.movieapp.Movie_info;
 import com.example.movieapp.R;
 import com.example.movieapp.model.Movie;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder>{
+public class RecommendationAdapter extends RecyclerView.Adapter<RecommendationAdapter.RecommendationViewHolder> {
+
     private ArrayList<Movie> movies;
     private Context context;
     private final int width;
 
-    public MovieAdapter(Context context, int width) {
+    public RecommendationAdapter(Context context,int width) {
         this.movies = new ArrayList<>();
         this.context = context;
         this.width = width;
@@ -38,23 +40,23 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     @NonNull
     @Override
-    public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public RecommendationViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
 
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.movie_list, viewGroup, false);
 
         v.getLayoutParams().width = this.width;
-        return new MovieViewHolder(v);
+        return new RecommendationViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MovieViewHolder movieViewHolder, int i) {
+    public void onBindViewHolder(@NonNull RecommendationViewHolder recommendationViewHolder, int i) {
 
-        movieViewHolder.title.setText(movies.get(i).getTitle());
-        movieViewHolder.setImage(movies.get(i).getPoster_path());
-        movieViewHolder.likes.setText(movies.get(i).getVote_count() + "");
-        movieViewHolder.ratings.setText(movies.get(i).getVote_average() + "");
+        recommendationViewHolder.title.setText(movies.get(i).getTitle());
+        recommendationViewHolder.setImage(movies.get(i).getPoster_path());
+        recommendationViewHolder.likes.setText(movies.get(i).getVote_count() + "");
+        recommendationViewHolder.ratings.setText(movies.get(i).getVote_average() + "");
 
     }
 
@@ -63,14 +65,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         return movies.size();
     }
 
-    public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class RecommendationViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private CardView cardView;
         private ImageView img;
         private TextView title, likes, ratings;
 
 
-        public MovieViewHolder(@NonNull View itemView) {
+        public RecommendationViewHolder(@NonNull View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.movie_view);
             img = itemView.findViewById(R.id.movie_img);
@@ -85,15 +87,19 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             Picasso.get().
                     load(MainActivity.BASE_IMAGE_URL + url)
                     .into(img);
+
         }
 
         @Override
         public void onClick(View v) {
 
             int position = getAdapterPosition();
-            MainActivity mainActivity = (MainActivity) context;
-            mainActivity.click(position);
+            Movie_info movie_info = (Movie_info) context;
+            movie_info.click(position);
 
         }
+
+
     }
+
 }

@@ -1,34 +1,32 @@
 package com.example.movieapp;
 
-import android.content.SharedPreferences;
+import android.content.Intent;
+
 import android.content.res.Resources;
 import android.os.Bundle;
 
 import com.example.movieapp.adapter.MovieAdapter;
+import com.example.movieapp.architecture.WatchedViewModel;
 import com.example.movieapp.model.Movie;
 import com.example.movieapp.retrofit.MovieViewModel;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.preference.PreferenceManager;
 
 import androidx.databinding.DataBindingUtil;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import androidx.lifecycle.ViewModelProvider;
+
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.movieapp.databinding.ActivityMainBinding;
+import com.google.gson.Gson;
 
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements OnClickMovie{
 
     public static final String BASE_MOVIEDB_URL = "https://api.themoviedb.org/";
     public static final String BASE_IMAGE_URL = "https://image.tmdb.org/t/p/original";
@@ -68,5 +66,17 @@ public class MainActivity extends AppCompatActivity{
         String language = getResources().getString(R.string.language);
         int page = 1 ; //default
         movieViewModel.getMovies(url,API_KEY,language,page);
+    }
+
+    @Override
+    public void click(int position) {
+        Gson gson = new Gson();
+        Intent intent = new Intent(this,Movie_info.class);
+        String movie = gson.toJson(movies.get(position));
+        Log.d("MainActivity", String.valueOf(position));
+        intent.putExtra("movie",movie);
+        new ViewModelProvider(this).get(WatchedViewModel.class)
+                .isValid(movies.get(position).getId());
+        startActivity(intent);
     }
 }

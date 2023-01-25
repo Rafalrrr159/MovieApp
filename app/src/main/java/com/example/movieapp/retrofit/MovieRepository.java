@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.example.movieapp.MainActivity;
+import com.example.movieapp.Movie_info;
 import com.example.movieapp.model.Movie;
 import com.example.movieapp.model.MovieContainer;
 
@@ -32,8 +33,6 @@ public class MovieRepository {
     }
 
 
-
-    //get the movies
     public void getMovies(String filter_type, String api_key, String language, int page) {
 
         Call<MovieContainer> call = movieDB.getMovies(filter_type, api_key, language, page);
@@ -52,6 +51,39 @@ public class MovieRepository {
                         mainActivity.movies = movies;
                     } else
                         Toast.makeText(mainActivity, "Something went wrong!", Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<MovieContainer> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+
+    public void getSimilar(int id, String api_key, String language) {
+
+        Call<MovieContainer> call = movieDB.getSimilar(id, api_key, language);
+
+        call.enqueue(new Callback<MovieContainer>() {
+            @Override
+            public void onResponse(Call<MovieContainer> call, Response<MovieContainer> response) {
+
+                if(response.isSuccessful() && response.code()==200){
+
+                    Movie_info movie_info = (Movie_info) context;
+                    ArrayList<Movie> movies = response.body().getMovies();
+                    if(movies!=null){
+
+                        movie_info.movies = movies;
+                        movie_info.movieAdapter.update(movies);
+
+                    }
+
 
                 }
 

@@ -17,4 +17,11 @@ public class MovieViewModel {
         movieRepository.getMovies(filter_type, api_key, language, page);
 
     }
+
+
+    public void getSimilar(int id,String api_key,String language){
+
+        movieRepository.getSimilar(id,api_key,language);
+
+    }
 }

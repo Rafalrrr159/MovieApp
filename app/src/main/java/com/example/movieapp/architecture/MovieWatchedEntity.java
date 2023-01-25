@@ -1,9 +1,20 @@
-package com.example.movieapp.model;
+package com.example.movieapp.architecture;
 
-public class Movie {
+import android.support.annotation.NonNull;
+
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "watched_table")
+public class MovieWatchedEntity {
+
+    @NonNull
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+
     private int vote_count;
 
-    private int id;
+    private int movie_id;
 
     private float vote_average;
 
@@ -15,32 +26,32 @@ public class Movie {
 
     private String original_title;
 
-    private int[] genre_ids;
-
     private String overview;
 
     private String release_date;
 
-
-    public Movie(int vote_count, int id, float vote_average, String title, String poster_path, String original_language, String original_title, int[] genre_ids, String overview, String release_date) {
+    public MovieWatchedEntity(int vote_count, int movie_id, float vote_average, String title, String poster_path, String original_language, String original_title, String overview, String release_date) {
         this.vote_count = vote_count;
-        this.id = id;
+        this.movie_id = movie_id;
         this.vote_average = vote_average;
         this.title = title;
         this.poster_path = poster_path;
         this.original_language = original_language;
         this.original_title = original_title;
-        this.genre_ids = genre_ids;
         this.overview = overview;
         this.release_date = release_date;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public int getVote_count() {
         return vote_count;
     }
 
-    public int getId() {
-        return id;
+    public int getMovie_id() {
+        return movie_id;
     }
 
     public float getVote_average() {
@@ -69,5 +80,9 @@ public class Movie {
 
     public String getRelease_date() {
         return release_date;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
