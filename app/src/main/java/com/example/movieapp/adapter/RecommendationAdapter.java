@@ -52,7 +52,6 @@ public class RecommendationAdapter extends RecyclerView.Adapter<RecommendationAd
 
     @Override
     public void onBindViewHolder(@NonNull RecommendationViewHolder recommendationViewHolder, int i) {
-
         recommendationViewHolder.title.setText(movies.get(i).getTitle());
         recommendationViewHolder.setImage(movies.get(i).getPoster_path());
         recommendationViewHolder.likes.setText(movies.get(i).getVote_count() + "");

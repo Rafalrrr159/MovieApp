@@ -1,7 +1,9 @@
 package com.example.movieapp;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -11,12 +13,15 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.movieapp.adapter.TrailerAdapter;
+//import com.example.movieapp.databinding.ActivityMovieInfoBinding;
 import com.example.movieapp.databinding.ActivityMovieInfoBinding;
 
 import com.example.movieapp.adapter.RecommendationAdapter;
 import com.example.movieapp.architecture.MovieWatchedEntity;
 import com.example.movieapp.architecture.WatchedViewModel;
 import com.example.movieapp.model.Movie;
+import com.example.movieapp.model.Trailer;
 import com.example.movieapp.retrofit.MovieViewModel;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
@@ -26,13 +31,15 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Movie_info extends AppCompatActivity implements View.OnClickListener, OnClickMovie {
+public class Movie_info extends AppCompatActivity implements View.OnClickListener, OnClickMovie, OnClickTrailer {
     private Movie movie;
     private ActivityMovieInfoBinding movieInfoBinding;
     private String shortString;
     private boolean shortStringEnabled = true;
     public static volatile boolean isWatched = true;
+    public static ArrayList<Trailer> trailers;
     public static ArrayList<Movie> movies;
+    public static TrailerAdapter trailerAdapter;
     public static RecommendationAdapter movieAdapter;
     private MovieViewModel movieViewModel;
     private WatchedViewModel watchedViewModel;
@@ -48,6 +55,10 @@ public class Movie_info extends AppCompatActivity implements View.OnClickListene
         movieInfoBinding.myWatched.setOnClickListener(this);
 
         movieWatchedEntities = new ArrayList<>();
+
+        trailerAdapter = new TrailerAdapter(this);
+        movieInfoBinding.movieTrailers.setAdapter(trailerAdapter);
+        movieInfoBinding.movieTrailers.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         int span;
         int width = (int) Resources.getSystem().getDisplayMetrics().widthPixels;
@@ -79,6 +90,8 @@ public class Movie_info extends AppCompatActivity implements View.OnClickListene
 
 
             movie = gson.fromJson(bundle.getString("movie"), Movie.class);
+
+            movieViewModel.getTrailers(movie.getId(), getResources().getString(R.string.api_key), getResources().getString(R.string.language2));
 
             movieViewModel.getSimilar(movie.getId(), getResources().getString(R.string.api_key), getResources().getString(R.string.language));
 
@@ -164,5 +177,22 @@ public class Movie_info extends AppCompatActivity implements View.OnClickListene
         super.onBackPressed();
         isWatched = true;
         finish();
+    }
+
+    @Override
+    public void clickTrailer(int position) {
+
+        Intent youtube = new Intent(Intent.ACTION_VIEW, Uri.parse("vnd.youtube:" + trailers.get(position).getKey()));
+        Intent web = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=" + trailers.get(position).getKey()));
+
+        try {
+            try {
+                startActivity(youtube);
+            } catch (ActivityNotFoundException e) {
+                startActivity(web);
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "You don't have proper application installed in your phone to play this video", Toast.LENGTH_LONG).show();
+        }
     }
 }

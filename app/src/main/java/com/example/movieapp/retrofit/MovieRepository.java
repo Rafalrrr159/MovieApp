@@ -1,12 +1,15 @@
 package com.example.movieapp.retrofit;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.movieapp.MainActivity;
 import com.example.movieapp.Movie_info;
 import com.example.movieapp.model.Movie;
 import com.example.movieapp.model.MovieContainer;
+import com.example.movieapp.model.Trailer;
+import com.example.movieapp.model.TrailerResponse;
 
 import java.util.ArrayList;
 
@@ -43,7 +46,6 @@ public class MovieRepository {
             public void onResponse(Call<MovieContainer> call, Response<MovieContainer> response) {
 
                 if (response.isSuccessful() && response.code() == 200) {
-
                     MainActivity mainActivity = (MainActivity) context;
                     ArrayList<Movie> movies = response.body().getMovies();
                     if (movies != null) {
@@ -51,18 +53,40 @@ public class MovieRepository {
                         mainActivity.movies = movies;
                     } else
                         Toast.makeText(mainActivity, "Something went wrong!", Toast.LENGTH_LONG).show();
-
                 }
-
             }
 
             @Override
             public void onFailure(Call<MovieContainer> call, Throwable t) {
-
+                Log.d("Movies", t.getMessage());
             }
         });
+    }
+
+    public void getTrailers(int id, String api_key, String language) {
 
 
+        Call<TrailerResponse> call = movieDB.getTrailers(id, api_key, language);
+
+        call.enqueue(new Callback<TrailerResponse>() {
+            @Override
+            public void onResponse(Call<TrailerResponse> call, Response<TrailerResponse> response) {
+
+                if(response.isSuccessful() && response.code()==200){
+                    Movie_info movie_info = (Movie_info) context;
+                    ArrayList<Trailer> trailers = response.body().getTrailers();
+                    if(trailers!=null) {
+                        movie_info.trailers = trailers;
+                        movie_info.trailerAdapter.update(trailers);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TrailerResponse> call, Throwable t) {
+                Log.d("Trailers", t.getMessage());
+            }
+        });
     }
 
     public void getSimilar(int id, String api_key, String language) {
@@ -74,27 +98,19 @@ public class MovieRepository {
             public void onResponse(Call<MovieContainer> call, Response<MovieContainer> response) {
 
                 if(response.isSuccessful() && response.code()==200){
-
                     Movie_info movie_info = (Movie_info) context;
                     ArrayList<Movie> movies = response.body().getMovies();
                     if(movies!=null){
-
                         movie_info.movies = movies;
                         movie_info.movieAdapter.update(movies);
-
                     }
-
-
                 }
-
             }
 
             @Override
             public void onFailure(Call<MovieContainer> call, Throwable t) {
-
+                Log.d("Similar", t.getMessage());
             }
         });
-
-
     }
 }

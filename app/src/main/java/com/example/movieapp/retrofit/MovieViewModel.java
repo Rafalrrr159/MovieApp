@@ -19,6 +19,13 @@ public class MovieViewModel {
     }
 
 
+    public void getTrailers(int id,String api_key,String language){
+
+        movieRepository.getTrailers(id,api_key,language);
+
+    }
+
+
     public void getSimilar(int id,String api_key,String language){
 
         movieRepository.getSimilar(id,api_key,language);

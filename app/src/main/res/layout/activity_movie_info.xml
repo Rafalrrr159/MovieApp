@@ -182,6 +182,22 @@
                 />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/movie_trailers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="9dp"
+                android:background="#F0000000"
+
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/movie_recommendations"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
