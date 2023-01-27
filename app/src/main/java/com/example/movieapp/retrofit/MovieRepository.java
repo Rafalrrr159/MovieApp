@@ -8,6 +8,8 @@ import com.example.movieapp.MainActivity;
 import com.example.movieapp.Movie_info;
 import com.example.movieapp.model.Movie;
 import com.example.movieapp.model.MovieContainer;
+import com.example.movieapp.model.Review;
+import com.example.movieapp.model.ReviewResponse;
 import com.example.movieapp.model.Trailer;
 import com.example.movieapp.model.TrailerResponse;
 
@@ -85,6 +87,31 @@ public class MovieRepository {
             @Override
             public void onFailure(Call<TrailerResponse> call, Throwable t) {
                 Log.d("Trailers", t.getMessage());
+            }
+        });
+    }
+
+    public void getReviews(int id, String api_key, String language) {
+
+        Call<ReviewResponse> call = movieDB.getReviews(id, api_key, language);
+
+        call.enqueue(new Callback<ReviewResponse>() {
+            @Override
+            public void onResponse(Call<ReviewResponse> call, Response<ReviewResponse> response) {
+
+                if(response.isSuccessful() && response.code()==200){
+                    Movie_info movie_info = (Movie_info) context;
+                    ArrayList<Review> reviews = response.body().getReviews();
+                    if(reviews!=null){
+                        movie_info.reviews = reviews;
+                        movie_info.reviewAdapter.update(reviews);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ReviewResponse> call, Throwable t) {
+                Log.d("Reviews", t.getMessage());
             }
         });
     }

@@ -26,6 +26,13 @@ public class MovieViewModel {
     }
 
 
+    public void getReviews(int id,String api_key,String language){
+
+        movieRepository.getReviews(id,api_key,language);
+
+    }
+
+
     public void getSimilar(int id,String api_key,String language){
 
         movieRepository.getSimilar(id,api_key,language);

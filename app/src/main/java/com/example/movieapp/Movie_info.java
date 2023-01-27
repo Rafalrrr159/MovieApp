@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.movieapp.adapter.ReviewAdapter;
 import com.example.movieapp.adapter.TrailerAdapter;
 //import com.example.movieapp.databinding.ActivityMovieInfoBinding;
 import com.example.movieapp.databinding.ActivityMovieInfoBinding;
@@ -21,6 +22,7 @@ import com.example.movieapp.adapter.RecommendationAdapter;
 import com.example.movieapp.architecture.MovieWatchedEntity;
 import com.example.movieapp.architecture.WatchedViewModel;
 import com.example.movieapp.model.Movie;
+import com.example.movieapp.model.Review;
 import com.example.movieapp.model.Trailer;
 import com.example.movieapp.retrofit.MovieViewModel;
 import com.google.gson.Gson;
@@ -38,8 +40,10 @@ public class Movie_info extends AppCompatActivity implements View.OnClickListene
     private boolean shortStringEnabled = true;
     public static volatile boolean isWatched = true;
     public static ArrayList<Trailer> trailers;
+    public static ArrayList<Review> reviews;
     public static ArrayList<Movie> movies;
     public static TrailerAdapter trailerAdapter;
+    public static ReviewAdapter reviewAdapter;
     public static RecommendationAdapter movieAdapter;
     private MovieViewModel movieViewModel;
     private WatchedViewModel watchedViewModel;
@@ -59,6 +63,10 @@ public class Movie_info extends AppCompatActivity implements View.OnClickListene
         trailerAdapter = new TrailerAdapter(this);
         movieInfoBinding.movieTrailers.setAdapter(trailerAdapter);
         movieInfoBinding.movieTrailers.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+        reviewAdapter = new ReviewAdapter(this);
+        movieInfoBinding.movieReviews.setAdapter(reviewAdapter);
+        movieInfoBinding.movieReviews.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         int span;
         int width = (int) Resources.getSystem().getDisplayMetrics().widthPixels;
@@ -92,6 +100,8 @@ public class Movie_info extends AppCompatActivity implements View.OnClickListene
             movie = gson.fromJson(bundle.getString("movie"), Movie.class);
 
             movieViewModel.getTrailers(movie.getId(), getResources().getString(R.string.api_key), getResources().getString(R.string.language2));
+
+            movieViewModel.getReviews(movie.getId(), getResources().getString(R.string.api_key), getResources().getString(R.string.language2));
 
             movieViewModel.getSimilar(movie.getId(), getResources().getString(R.string.api_key), getResources().getString(R.string.language));
 
