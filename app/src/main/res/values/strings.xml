@@ -4,4 +4,6 @@
     <string name="api_key">3f98d74dffcb61469ec339a31ed890d4</string>
     <string name="language">pl-PL</string>
     <string name="language2">en-US</string>
+    <string name="sort_key">sort_key</string>
+    <string name="popular">popular</string>
 </resources>

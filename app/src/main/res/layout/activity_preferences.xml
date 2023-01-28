@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
+        android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".MainActivity">
+        android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
@@ -17,15 +15,18 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:background="@color/blue"
             android:elevation="4dp"
-            app:title="@string/app_name"
+            app:title="My preferences"
             app:titleTextColor="@android:color/white"
             app:navigationIcon="@drawable/star"
             />
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_homepage"
+        <fragment
+            android:id="@+id/preference_fragment_"
+            android:name="com.example.movieapp.Settings_preferences"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp" />
+
+
     </LinearLayout>
 </layout>
