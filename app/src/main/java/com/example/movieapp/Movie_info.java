@@ -117,8 +117,8 @@ public class Movie_info extends AppCompatActivity implements View.OnClickListene
                     .into(movieInfoBinding.movieImg);
 
 
-            if (!isWatched) movieInfoBinding.myWatched.setImageResource(R.drawable.like);
-            else movieInfoBinding.myWatched.setImageResource(R.drawable.star);
+            if (!isWatched) movieInfoBinding.myWatched.setImageResource(R.mipmap.not_watched);
+            else movieInfoBinding.myWatched.setImageResource(R.mipmap.watched);
 
         } else {
 
@@ -146,13 +146,13 @@ public class Movie_info extends AppCompatActivity implements View.OnClickListene
 
             if (isWatched) {
                 watchedViewModel.add(new MovieWatchedEntity(movie.getVote_count(), movie.getId(), movie.getVote_average(), movie.getTitle(), movie.getPoster_path(), movie.getOriginal_language(), movie.getOriginal_title(), movie.getOverview(), movie.getRelease_date()));
-                movieInfoBinding.myWatched.setImageResource(R.drawable.like);
+                movieInfoBinding.myWatched.setImageResource(R.mipmap.not_watched);
                 Toast.makeText(this, R.string.mark_watched, Toast.LENGTH_SHORT).show();
 
 
             } else {
                 watchedViewModel.remove(movie.getId());
-                movieInfoBinding.myWatched.setImageResource(R.drawable.star);
+                movieInfoBinding.myWatched.setImageResource(R.mipmap.watched);
                 Toast.makeText(this, R.string.remove_watched, Toast.LENGTH_SHORT).show();
             }
             isWatched = !isWatched;

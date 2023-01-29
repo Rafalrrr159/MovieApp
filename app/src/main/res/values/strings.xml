@@ -37,4 +37,6 @@
     <string name="review_author">Autor</string>
     <string name="sample_review">Treść recenzji</string>
     <string name="sample_trailer">Nazwa zwiastunu</string>
+    <string name="my_watched">Obejrzane filmy</string>
+    <string name="sort">Sortuj filmy po</string>
 </resources>

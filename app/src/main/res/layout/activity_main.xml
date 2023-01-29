@@ -19,7 +19,6 @@
             android:elevation="4dp"
             app:title="@string/app_name"
             app:titleTextColor="@android:color/white"
-            app:navigationIcon="@drawable/star"
             />
 
 

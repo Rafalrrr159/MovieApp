@@ -15,9 +15,9 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:background="@color/blue"
             android:elevation="4dp"
-            app:title="My preferences"
+            app:title="@string/settings"
             app:titleTextColor="@android:color/white"
-            app:navigationIcon="@drawable/star"
+            app:navigationIcon="@drawable/arrow"
             />
 
         <fragment
