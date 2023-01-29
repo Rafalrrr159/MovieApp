@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.example.movieapp.MainActivity;
 import com.example.movieapp.Movie_info;
+import com.example.movieapp.R;
 import com.example.movieapp.model.Movie;
 import com.example.movieapp.model.MovieContainer;
 import com.example.movieapp.model.Review;
@@ -54,13 +55,13 @@ public class MovieRepository {
                         mainActivity.movieAdapter.update(response.body().getMovies());
                         mainActivity.movies = movies;
                     } else
-                        Toast.makeText(mainActivity, "Something went wrong!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(mainActivity, R.string.error, Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<MovieContainer> call, Throwable t) {
-                Log.d("Movies", t.getMessage());
+                Log.d(String.valueOf(R.string.movies), t.getMessage());
             }
         });
     }
@@ -86,7 +87,7 @@ public class MovieRepository {
 
             @Override
             public void onFailure(Call<TrailerResponse> call, Throwable t) {
-                Log.d("Trailers", t.getMessage());
+                Log.d(String.valueOf(R.string.trailers), t.getMessage());
             }
         });
     }
@@ -111,7 +112,7 @@ public class MovieRepository {
 
             @Override
             public void onFailure(Call<ReviewResponse> call, Throwable t) {
-                Log.d("Reviews", t.getMessage());
+                Log.d(String.valueOf(R.string.reviews), t.getMessage());
             }
         });
     }
@@ -136,7 +137,7 @@ public class MovieRepository {
 
             @Override
             public void onFailure(Call<MovieContainer> call, Throwable t) {
-                Log.d("Similar", t.getMessage());
+                Log.d(String.valueOf(R.string.similar), t.getMessage());
             }
         });
     }

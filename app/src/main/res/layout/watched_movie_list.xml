@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5sp"
-                android:text="Ratings"
+                android:text="@string/ratings"
                 android:layout_gravity="center_horizontal"
                 android:textStyle="bold" />
 
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="0sp"
-                android:text="Likes"
+                android:text="@string/likes"
                 android:textStyle="bold" />
 
             <ImageView

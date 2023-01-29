@@ -97,14 +97,14 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
         int id = item.getItemId();
         if(id==R.id.settings){
-            Log.d("Main","settings");
+            Log.d(String.valueOf(R.string.main),String.valueOf(R.string.settings));
             Intent intent = new Intent(MainActivity.this,Preferences.class);
             startActivity(intent);
 
         }
 
         if(id==R.id.watched){
-            Log.d("Main","watched");
+            Log.d(String.valueOf(R.string.main),String.valueOf(R.string.watched));
             Intent intent = new Intent(MainActivity.this,Watched.class);
             startActivity(intent);
 
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         Gson gson = new Gson();
         Intent intent = new Intent(this,Movie_info.class);
         String movie = gson.toJson(movies.get(position));
-        Log.d("MainActivity", String.valueOf(position));
+        Log.d(String.valueOf(R.string.main), String.valueOf(position));
         intent.putExtra("movie",movie);
         new ViewModelProvider(this).get(WatchedViewModel.class)
                 .isValid(movies.get(position).getId());

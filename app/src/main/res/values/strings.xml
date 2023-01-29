@@ -5,5 +5,36 @@
     <string name="language">pl-PL</string>
     <string name="language2">en-US</string>
     <string name="sort_key">sort_key</string>
-    <string name="popular">popular</string>
+    <string name="sort_value">sort_value</string>
+
+    <string name="popular">Popularne</string>
+    <string name="top_rated">Najwyżej oceniane</string>
+    <string name="now_playing">Aktualnie grane</string>
+    <string name="upcoming">Nadchodzące</string>
+
+    <string name="popular2">popular</string>
+    <string name="top_rated2">top_rated</string>
+    <string name="now_playing2">now_playing</string>
+    <string name="upcoming2">upcoming</string>
+
+    <string name='error'>Coś poszło nie tak</string>
+    <string name='movies'>Filmy</string>
+    <string name='trailers'>Zwiastuny</string>
+    <string name='reviews'>Recenzje</string>
+    <string name='similar'>Podobne filmy</string>
+    <string name='main'>Main</string>
+    <string name='settings'>Ustawienia</string>
+    <string name='watched'>Obejrzane</string>
+    <string name="show_less">Pokaż mniej</string>
+    <string name="show_more">Pokaż więcej</string>
+    <string name="mark_watched">Oznaczono jako obejrzany</string>
+    <string name="remove_watched">Wyrzucono z obejrzanych</string>
+    <string name="app_not_found">Nie posiadasz aplikacji umożliwiającej odtworzenie tego wideo</string>
+    <string name="title">Tytuł</string>
+    <string name="ratings">Oceny</string>
+    <string name="likes">Polubienia</string>
+    <string name="description">Opis</string>
+    <string name="review_author">Autor</string>
+    <string name="sample_review">Treść recenzji</string>
+    <string name="sample_trailer">Nazwa zwiastunu</string>
 </resources>

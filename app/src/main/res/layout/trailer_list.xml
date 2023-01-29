@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:padding="2dp"
-            android:text="Sample Trailer 1 "
+            android:text="@string/sample_trailer"
             android:textColor="@color/teal_200"
             android:textStyle="bold" />
     </LinearLayout>

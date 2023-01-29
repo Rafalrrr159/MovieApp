@@ -122,7 +122,7 @@ public class Movie_info extends AppCompatActivity implements View.OnClickListene
 
         } else {
 
-            Toast.makeText(this, "Something went wrong..", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, String.valueOf(R.string.error), Toast.LENGTH_SHORT).show();
 
         }
 
@@ -135,10 +135,10 @@ public class Movie_info extends AppCompatActivity implements View.OnClickListene
         if (id == R.id.read_more) {
             if (shortStringEnabled) {
                 movieInfoBinding.movieDes.setText(movie.getOverview());
-                movieInfoBinding.readMore.setText("Show less");
+                movieInfoBinding.readMore.setText(R.string.show_less);
             } else {
                 movieInfoBinding.movieDes.setText(shortString);
-                movieInfoBinding.readMore.setText("Read more");
+                movieInfoBinding.readMore.setText(R.string.show_more);
             }
 
             shortStringEnabled = !shortStringEnabled;
@@ -147,13 +147,13 @@ public class Movie_info extends AppCompatActivity implements View.OnClickListene
             if (isWatched) {
                 watchedViewModel.add(new MovieWatchedEntity(movie.getVote_count(), movie.getId(), movie.getVote_average(), movie.getTitle(), movie.getPoster_path(), movie.getOriginal_language(), movie.getOriginal_title(), movie.getOverview(), movie.getRelease_date()));
                 movieInfoBinding.myWatched.setImageResource(R.drawable.like);
-                Toast.makeText(this, "Marked as Watched", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.mark_watched, Toast.LENGTH_SHORT).show();
 
 
             } else {
                 watchedViewModel.remove(movie.getId());
                 movieInfoBinding.myWatched.setImageResource(R.drawable.star);
-                Toast.makeText(this, "Removed from Watched", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.remove_watched, Toast.LENGTH_SHORT).show();
             }
             isWatched = !isWatched;
         }
@@ -202,7 +202,7 @@ public class Movie_info extends AppCompatActivity implements View.OnClickListene
                 startActivity(web);
             }
         } catch (Exception e) {
-            Toast.makeText(this, "You don't have proper application installed in your phone to play this video", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.app_not_found, Toast.LENGTH_LONG).show();
         }
     }
 }

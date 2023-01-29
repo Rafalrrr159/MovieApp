@@ -2,17 +2,17 @@
 <resources>
 
     <string-array name="sort_keys">
-        <item>Popular</item>
-        <item>Top rated</item>
-        <item>Now playing</item>
-        <item>Upcoming</item>
+        <item>@string/popular</item>
+        <item>@string/top_rated</item>
+        <item>@string/now_playing</item>
+        <item>@string/upcoming</item>
     </string-array>
 
     <string-array name="sort_values">
-        <item>popular</item>
-        <item>top_rated</item>
-        <item>now_playing</item>
-        <item>upcoming</item>
+        <item>@string/popular2</item>
+        <item>@string/top_rated2</item>
+        <item>@string/now_playing2</item>
+        <item>@string/upcoming2</item>
     </string-array>
 
 </resources>
